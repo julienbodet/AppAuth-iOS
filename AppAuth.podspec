@@ -32,7 +32,7 @@ It follows the OAuth 2.0 for Native Apps best current practice
 
   s.platforms    = { :ios => "7.0", :osx => "10.9", :watchos => "2.0", :tvos => "9.0" }
 
-  s.source       = { :git => "https://github.com/openid/AppAuth-iOS.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/julienbodet/AppAuth-iOS.git", :tag => s.version }
 
   s.source_files = "Source/*.{h,m}"
   s.requires_arc = true
