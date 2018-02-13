@@ -51,6 +51,7 @@ static id<OIDSafariViewControllerFactory> __nullable gSafariViewControllerFactor
   __weak SFSafariViewController *_safariVC;
   SFAuthenticationSession *_authenticationVC;
 #pragma clang diagnostic pop
+  BOOL _useAuthenticationSession;
 }
 
 /** @brief Obtains the current @c OIDSafariViewControllerFactory; creating a new default instance if
@@ -81,6 +82,15 @@ static id<OIDSafariViewControllerFactory> __nullable gSafariViewControllerFactor
     _presentingViewController = presentingViewController;
   }
   return self;
+}
+
+- (nullable instancetype)initWithPresentingViewController: (UIViewController *)presentingViewController
+                                 useAuthenticationSession: (BOOL) useAuthenticationSession {
+    self = [self initWithPresentingViewController: presentingViewController];
+    if (self) {
+        _useAuthenticationSession = useAuthenticationSession;
+    }
+    return self;
 }
 
 - (BOOL)presentAuthorizationRequest:(OIDAuthorizationRequest *)request

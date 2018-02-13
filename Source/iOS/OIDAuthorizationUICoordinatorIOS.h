@@ -62,6 +62,15 @@ NS_ASSUME_NONNULL_BEGIN
     (UIViewController *)presentingViewController
     NS_DESIGNATED_INITIALIZER;
 
+/*! @brief A custom initializer that gives the ability to not use iOS 11 SFAuthenticationSession.
+ @param presentingViewController The view controller from which to present the
+        \SFSafariViewController.
+ @param useAuthenticationSession A boolean indicaing if the coordinator should
+        use the SFAuthenticationSession on iOS 11.
+ */
+- (nullable instancetype)initWithPresentingViewController: (UIViewController *)presentingViewController
+                                 useAuthenticationSession: (BOOL) useAuthenticationSession;
+
 @end
 
 NS_ASSUME_NONNULL_END
