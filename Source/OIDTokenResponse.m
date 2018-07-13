@@ -151,6 +151,58 @@ static NSString *const kAdditionalParametersKey = @"additionalParameters";
 
 #pragma mark - NSObject overrides
 
+- (BOOL)isEqual:(id)object {
+  if (self == object) {
+    return YES;
+  }
+  
+  if (![object isKindOfClass:[OIDTokenResponse class]]) {
+    return NO;
+  }
+  
+  return [self isEqualToTokenResponse:(OIDTokenResponse *)object];
+}
+
+- (BOOL)isEqualToTokenResponse:(OIDTokenResponse *)tokenResponse {
+  if (!tokenResponse) {
+    return NO;
+  }
+  
+  if (![_accessToken isEqualToString:tokenResponse.accessToken]) {
+    return NO;
+  }
+  
+  if (![_accessTokenExpirationDate isEqualToDate:tokenResponse.accessTokenExpirationDate]) {
+    return NO;
+  }
+  
+  if (![_tokenType isEqualToString:tokenResponse.tokenType]) {
+    return NO;
+  }
+  
+  if (![_idToken isEqualToString:tokenResponse.idToken]) {
+    return NO;
+  }
+  
+  if (![_refreshToken isEqualToString:tokenResponse.refreshToken]) {
+    return NO;
+  }
+  
+  if (![_scope isEqualToString:tokenResponse.scope]) {
+    return NO;
+  }
+  
+  if (![_request isEqualToTokenRequest:tokenResponse.request]) {
+    return NO;
+  }
+  
+  if (![_additionalParameters isEqualToDictionary:tokenResponse.additionalParameters]) {
+    return NO;
+  }
+  
+  return YES;
+}
+
 - (NSString *)description {
   return [NSString stringWithFormat:@"<%@: %p, accessToken: \"%@\", accessTokenExpirationDate: %@, "
                                      "tokenType: %@, idToken: \"%@\", refreshToken: \"%@\", "

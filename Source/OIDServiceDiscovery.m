@@ -193,6 +193,32 @@ static NSString *const kOPTosURIKey = @"op_tos_uri";
   [_discoveryDictionary encodeWithCoder:aCoder];
 }
 
+#pragma mark - NSObject overrides
+
+- (BOOL)isEqual:(id)object {
+  if (self == object) {
+    return YES;
+  }
+  
+  if (![object isKindOfClass:[OIDServiceDiscovery class]]) {
+    return NO;
+  }
+  
+  return [self isEqualToServiceDiscovery:(OIDServiceDiscovery *)object];
+}
+
+- (BOOL)isEqualToServiceDiscovery:(OIDServiceDiscovery *)serviceDiscovery {
+  if (!serviceDiscovery) {
+    return NO;
+  }
+  
+  if (![_discoveryDictionary isEqualToDictionary:serviceDiscovery.discoveryDictionary]) {
+    return NO;
+  }
+  
+  return YES;
+}
+
 #pragma mark - Properties
 
 - (NSDictionary<NSString *, NSString *> *)discoveryDictionary {

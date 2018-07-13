@@ -350,6 +350,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)initWithDictionary:(NSDictionary *)serviceDiscoveryDictionary
                                       error:(NSError **_Nullable)error NS_DESIGNATED_INITIALIZER;
 
+/*! @brief Returns a Boolean value that indicates whether a given service discovery is equal to the
+        receiver.
+    @param serviceDiscovery The service discovery with which to compare the receiver.
+    @return YES if serviceDiscovery is equal to the receiver, otherwise NO.
+ */
+- (BOOL)isEqualToServiceDiscovery:(OIDServiceDiscovery *)serviceDiscovery;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -182,7 +182,47 @@ NS_ASSUME_NONNULL_BEGIN
   [aCoder encodeObject:_discoveryDocument forKey:kDiscoveryDocumentKey];
 }
 
-#pragma mark - description
+#pragma mark - NSObject overrides
+
+- (BOOL)isEqual:(id)object {
+  if (self == object) {
+    return YES;
+  }
+  
+  if (![object isKindOfClass:[OIDServiceConfiguration class]]) {
+    return NO;
+  }
+  
+  return [self isEqualToServiceConfiguration:(OIDServiceConfiguration *)object];
+}
+
+- (BOOL)isEqualToServiceConfiguration:(OIDServiceConfiguration *)serviceConfiguration {
+  if (!serviceConfiguration) {
+    return NO;
+  }
+  
+  if (![_authorizationEndpoint isEqual:serviceConfiguration.authorizationEndpoint]) {
+    return NO;
+  }
+  
+  if (![_tokenEndpoint isEqual:serviceConfiguration.tokenEndpoint]) {
+    return NO;
+  }
+  
+  if (![_issuer isEqual:serviceConfiguration.issuer]) {
+    return NO;
+  }
+  
+  if (![_registrationEndpoint isEqual:serviceConfiguration.registrationEndpoint]) {
+    return NO;
+  }
+  
+  if (![_discoveryDocument isEqualToServiceDiscovery:serviceConfiguration.discoveryDocument]) {
+    return NO;
+  }
+  
+  return YES;
+}
 
 - (NSString *)description {
   return [NSString stringWithFormat:

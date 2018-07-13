@@ -62,12 +62,10 @@ typedef void (^OIDAuthStateAuthorizationCallback)(OIDAuthState *_Nullable authSt
    */
   id _pendingActionsSyncObject;
 
-  /*! @brief If YES, tokens will be refreshed on the next API call regardless of expiry.
-   */
-  BOOL _needsTokenRefresh;
 
   // property variables
   NSString *_refreshToken;
+  BOOL _needsTokenRefresh;
   NSString *_scope;
   OIDAuthorizationResponse *_lastAuthorizationResponse;
   OIDTokenResponse *_lastTokenResponse;
@@ -84,6 +82,10 @@ typedef void (^OIDAuthStateAuthorizationCallback)(OIDAuthState *_Nullable authSt
     @see https://tools.ietf.org/html/rfc6749#section-5.1
  */
 @property(nonatomic, readonly, nullable) NSString *refreshToken;
+
+/*! @brief If YES, tokens will be refreshed on the next API call regardless of expiry.
+ */
+@property(nonatomic, readonly) BOOL needsTokenRefresh;
 
 /*! @brief The scope of the current authorization grant.
     @discussion This represents the latest scope returned by the server and may be a subset of the
@@ -283,6 +285,13 @@ typedef void (^OIDAuthStateAuthorizationCallback)(OIDAuthState *_Nullable authSt
  */
 - (void)withFreshTokensPerformAction:(OIDAuthStateAction)action
     __deprecated_msg("Use OIDAuthState.performActionWithFreshTokens:");
+
+/*! @brief Returns a Boolean value that indicates whether a given auth state is equal to the
+        receiver.
+    @param authState The auth state with which to compare the receiver.
+    @return YES if authState is equal to the receiver, otherwise NO.
+ */
+- (BOOL)isEqualToAuthState:(OIDAuthState *)authState;
 
 @end
 

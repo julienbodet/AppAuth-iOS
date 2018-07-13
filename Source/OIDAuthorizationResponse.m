@@ -173,6 +173,62 @@ static NSString *const kTokenExchangeRequestException =
 
 #pragma mark - NSObject overrides
 
+- (BOOL)isEqual:(id)object {
+  if (self == object) {
+    return YES;
+  }
+  
+  if (![object isKindOfClass:[OIDAuthorizationResponse class]]) {
+    return NO;
+  }
+  
+  return [self isEqualToAuthorizationResponse:(OIDAuthorizationResponse *)object];
+}
+
+- (BOOL)isEqualToAuthorizationResponse:(OIDAuthorizationResponse *)authorizationResponse {
+  if (!authorizationResponse) {
+    return NO;
+  }
+  
+  if (![_request isEqualToAuthorizationRequest:authorizationResponse.request]) {
+    return NO;
+  }
+  
+  if (![_state isEqualToString:authorizationResponse.state]) {
+    return NO;
+  }
+  
+  if (![_authorizationCode isEqualToString:authorizationResponse.authorizationCode]) {
+    return NO;
+  }
+  
+  if (![_accessToken isEqualToString:authorizationResponse.accessToken]) {
+    return NO;
+  }
+  
+  if (![_accessTokenExpirationDate isEqualToDate:authorizationResponse.accessTokenExpirationDate]) {
+    return NO;
+  }
+  
+  if (![_tokenType isEqualToString:authorizationResponse.tokenType]) {
+    return NO;
+  }
+  
+  if (![_idToken isEqualToString:authorizationResponse.idToken]) {
+    return NO;
+  }
+  
+  if (![_scope isEqualToString:authorizationResponse.scope]) {
+    return NO;
+  }
+  
+  if (![_additionalParameters isEqualToDictionary:authorizationResponse.additionalParameters]) {
+    return NO;
+  }
+  
+  return YES;
+}
+
 - (NSString *)description {
   return [NSString stringWithFormat:@"<%@: %p, authorizationCode: %@, state: \"%@\", accessToken: "
                                      "\"%@\", accessTokenExpirationDate: %@, tokenType: %@, "

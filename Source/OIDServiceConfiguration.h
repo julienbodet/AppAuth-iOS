@@ -104,6 +104,13 @@ typedef void (^OIDServiceConfigurationCreated)
  */
 - (instancetype)initWithDiscoveryDocument:(OIDServiceDiscovery *)discoveryDocument;
 
+/*! @brief Returns a Boolean value that indicates whether a given service configuration is equal to
+        the receiver.
+    @param serviceConfiguration The service configuration with which to compare the receiver.
+    @return YES if serviceConfiguration is equal to the receiver, otherwise NO.
+ */
+- (BOOL)isEqualToServiceConfiguration:(OIDServiceConfiguration *)serviceConfiguration;
+
 @end
 
 NS_ASSUME_NONNULL_END

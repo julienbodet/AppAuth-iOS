@@ -165,6 +165,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSURLRequest *)URLRequest;
 
+/*! @brief Returns a Boolean value that indicates whether a given token request is equal to the
+        receiver.
+    @param tokenRequest The token request with which to compare the receiver.
+    @return YES if tokenRequest is equal to the receiver, otherwise NO.
+ */
+- (BOOL)isEqualToTokenRequest:(OIDTokenRequest *)tokenRequest;
+
 @end
 
 NS_ASSUME_NONNULL_END

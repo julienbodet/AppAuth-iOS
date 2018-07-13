@@ -287,6 +287,13 @@ __deprecated_msg("Replaced with OIDAuthState.initWithConfiguration:clientId:clie
  */
 + (nullable NSString *)codeChallengeS256ForVerifier:(nullable NSString *)codeVerifier;
 
+/*! @brief Returns a Boolean value that indicates whether a given authorization request is equal
+        to the receiver.
+    @param authorizationRequest The authorization request with which to compare the receiver.
+    @return YES if authorizationRequest is equal to the receiver, otherwise NO.
+ */
+- (BOOL)isEqualToAuthorizationRequest:(OIDAuthorizationRequest *)authorizationRequest;
+
 @end
 
 NS_ASSUME_NONNULL_END

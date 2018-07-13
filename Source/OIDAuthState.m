@@ -95,6 +95,7 @@ static const NSUInteger kExpiryTimeTolerance = 60;
 @implementation OIDAuthState
 
 @synthesize refreshToken = _refreshToken;
+@synthesize needsTokenRefresh = _needsTokenRefresh;
 @synthesize scope = _scope;
 @synthesize lastAuthorizationResponse = _lastAuthorizationResponse;
 @synthesize lastTokenResponse = _lastTokenResponse;
@@ -228,6 +229,52 @@ static const NSUInteger kExpiryTimeTolerance = 60;
                                     _lastTokenResponse,
                                     _lastRegistrationResponse,
                                     _authorizationError];
+}
+
+- (BOOL)isEqual:(id)object {
+  if (self == object) {
+    return YES;
+  }
+  
+  if (![object isKindOfClass:[OIDAuthState class]]) {
+    return NO;
+  }
+  
+  return [self isEqualToAuthState:(OIDAuthState *)object];
+}
+
+- (BOOL)isEqualToAuthState:(OIDAuthState *)authState {
+  if (!authState) {
+    return NO;
+  }
+  
+  if (![_lastAuthorizationResponse isEqualToAuthorizationResponse:authState.lastAuthorizationResponse]) {
+    return NO;
+  }
+  
+  if (![_lastTokenResponse isEqualToTokenResponse:authState.lastTokenResponse]) {
+    return NO;
+  }
+  
+  if (_authorizationError.code != authState.authorizationError.code ||
+      ![_authorizationError.domain isEqualToString:authState.authorizationError.domain] ||
+      ![_authorizationError.userInfo isEqualToDictionary:authState.authorizationError.userInfo]) {
+    return NO;
+  }
+  
+  if (![_scope isEqualToString:authState.scope]) {
+    return NO;
+  }
+  
+  if (![_refreshToken isEqualToString:authState.refreshToken]) {
+    return NO;
+  }
+  
+  if (_needsTokenRefresh != authState.needsTokenRefresh) {
+    return NO;
+  }
+  
+  return YES;
 }
 
 #pragma mark - NSSecureCoding

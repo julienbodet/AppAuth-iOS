@@ -134,6 +134,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable OIDTokenRequest *)tokenExchangeRequestWithAdditionalParameters:
     (nullable NSDictionary<NSString *, NSString *> *)additionalParameters;
 
+/*! @brief Returns a Boolean value that indicates whether a given authorization response is equal
+        to the receiver.
+    @param authorizationResponse The authorization response with which to compare the receiver.
+    @return YES if authorizationResponse is equal to the receiver, otherwise NO.
+ */
+- (BOOL)isEqualToAuthorizationResponse:(OIDAuthorizationResponse *)authorizationResponse;
+
 @end
 
 NS_ASSUME_NONNULL_END

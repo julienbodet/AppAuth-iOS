@@ -305,6 +305,74 @@ NSString *const OIDOAuthorizationRequestCodeChallengeMethodS256 = @"S256";
 
 #pragma mark - NSObject overrides
 
+- (BOOL)isEqual:(id)object {
+  if (self == object) {
+    return YES;
+  }
+  
+  if (![object isKindOfClass:[OIDAuthorizationRequest class]]) {
+    return NO;
+  }
+  
+  return [self isEqualToAuthorizationRequest:(OIDAuthorizationRequest *)object];
+}
+
+- (BOOL)isEqualToAuthorizationRequest:(OIDAuthorizationRequest *)authorizationRequest {
+  if (!authorizationRequest) {
+    return NO;
+  }
+  
+  if (![_configuration isEqualToServiceConfiguration:authorizationRequest.configuration]) {
+    return NO;
+  }
+  
+  if (![_responseType isEqualToString:authorizationRequest.responseType]) {
+    return NO;
+  }
+  
+  if (![_clientID isEqualToString:authorizationRequest.clientID]) {
+    return NO;
+  }
+  
+  if (![_clientSecret isEqualToString:authorizationRequest.clientSecret]) {
+    return NO;
+  }
+  
+  if (![_scope isEqualToString:authorizationRequest.scope]) {
+    return NO;
+  }
+  
+  if (![_redirectURL isEqual:authorizationRequest.redirectURL]) {
+    return NO;
+  }
+  
+  if (![_state isEqualToString:authorizationRequest.state]) {
+    return NO;
+  }
+  
+  if (![_nonce isEqualToString:authorizationRequest.nonce]) {
+    return NO;
+  }
+  
+  if (![_codeVerifier isEqualToString:authorizationRequest.codeVerifier]) {
+    return NO;
+  }
+  
+  if (![_codeChallenge isEqualToString:authorizationRequest.codeChallenge]) {
+    return NO;
+  }
+  
+  if (![_codeChallengeMethod isEqualToString:authorizationRequest.codeChallengeMethod]) {
+    return NO;
+  }
+  
+  if (![_additionalParameters isEqualToDictionary:authorizationRequest.additionalParameters]) {
+    return NO;
+  }
+  
+  return YES;
+}
+
 - (NSString *)description {
   return [NSString stringWithFormat:@"<%@: %p, request: %@>",
                                     NSStringFromClass([self class]),

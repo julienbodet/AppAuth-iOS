@@ -115,6 +115,13 @@ NS_ASSUME_NONNULL_BEGIN
                      parameters:(NSDictionary<NSString *, NSObject<NSCopying> *> *)parameters
                      NS_DESIGNATED_INITIALIZER;
 
+/*! @brief Returns a Boolean value that indicates whether a given token response is equal to the
+        receiver.
+    @param tokenResponse The token response with which to compare the receiver.
+    @return YES if tokenResponse is equal to the receiver, otherwise NO.
+ */
+- (BOOL)isEqualToTokenResponse:(OIDTokenResponse *)tokenResponse;
+
 @end
 
 NS_ASSUME_NONNULL_END

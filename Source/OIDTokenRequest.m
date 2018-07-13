@@ -216,6 +216,62 @@ static NSString *const kAdditionalParametersKey = @"additionalParameters";
 
 #pragma mark - NSObject overrides
 
+- (BOOL)isEqual:(id)object {
+  if (self == object) {
+    return YES;
+  }
+  
+  if (![object isKindOfClass:[OIDTokenRequest class]]) {
+    return NO;
+  }
+  
+  return [self isEqualToTokenRequest:(OIDTokenRequest *)object];
+}
+
+- (BOOL)isEqualToTokenRequest:(OIDTokenRequest *)tokenRequest {
+  if (!tokenRequest) {
+    return NO;
+  }
+  
+  if (![_configuration isEqualToServiceConfiguration:tokenRequest.configuration]) {
+    return NO;
+  }
+  
+  if (![_grantType isEqualToString:tokenRequest.grantType]) {
+    return NO;
+  }
+  
+  if (![_authorizationCode isEqualToString:tokenRequest.authorizationCode]) {
+    return NO;
+  }
+  
+  if (![_clientID isEqualToString:tokenRequest.clientID]) {
+    return NO;
+  }
+  
+  if (![_redirectURL isEqual:tokenRequest.redirectURL]) {
+    return NO;
+  }
+  
+  if (![_scope isEqualToString:tokenRequest.scope]) {
+    return NO;
+  }
+  
+  if (![_refreshToken isEqualToString:tokenRequest.refreshToken]) {
+    return NO;
+  }
+  
+  if (![_codeVerifier isEqualToString:tokenRequest.codeVerifier]) {
+    return NO;
+  }
+  
+  if (![_additionalParameters isEqualToDictionary:tokenRequest.additionalParameters]) {
+    return NO;
+  }
+  
+  return YES;
+}
+
 - (NSString *)description {
   NSURLRequest *request = self.URLRequest;
   NSString *requestBody =
